@@ -1,0 +1,32 @@
+//
+//  ReduxSandwichesApp.swift
+//  ReduxSandwiches
+//
+//  Created by Farley Caesar on 2020-08-15.
+//
+
+import SwiftUI
+
+func initializedStore() -> AppStore {
+    let theStore = AppStore(initialState: .defaultState,
+                            reducer: appReducer,
+                            middleware: [createLoggerMiddleware(),
+                                         createSandwichMiddleware(for: SandwichService())
+                                         ])
+
+    theStore.dispatch(.sandwich(action: .retrieveCurrentSandwich))
+    
+    return theStore
+}
+
+@main
+struct ReduxSandwichesApp: App {
+    @StateObject private var store: AppStore = initializedStore()
+    
+    var body: some Scene {
+        WindowGroup {
+            MainMenuView()
+                .environmentObject(store)
+        }
+    }
+}
