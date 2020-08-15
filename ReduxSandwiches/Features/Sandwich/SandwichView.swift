@@ -12,19 +12,30 @@ struct SandwichView: View {
     
     var body: some View {
         VStack {
-            currentSandwichView
-                .padding()
-                .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.25)))
-                //.transition(.scale)
+            Text("Sandwiches")
+                .bold()
+                .font(.largeTitle)
+            
+            Spacer()
+            
+            VStack {
+                Spacer()
+                
+                currentSandwichView
+                    .padding()
+                    .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.25)))
 
-            switch sandwichState.status {
-            case .loaded, .empty:
-                Button("Load New Sandwich") {
-                    loadSandwich()
+                switch sandwichState.status {
+                case .loaded, .empty:
+                    Button("Load New Sandwich") {
+                        loadSandwich()
+                    }
+
+                default:
+                    EmptyView()
                 }
-
-            default:
-                EmptyView()
+                
+                Spacer()
             }
         }
         .alert(isPresented: .constant(isError())) {
@@ -60,7 +71,7 @@ struct SandwichView: View {
                 VStack {
                     Image(currentSandwich)
                         .resizable()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 250, height: 250)
                         .clipShape(Circle())
                         .padding()
 
