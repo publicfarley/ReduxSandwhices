@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B487B79624E8C8B2007A8DE5 /* SandwichViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B487B79524E8C8B2007A8DE5 /* SandwichViewModel.swift */; };
+		B487B79824E8F9CA007A8DE5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B487B79724E8F9CA007A8DE5 /* SettingsViewModel.swift */; };
 		B4A52CB024E850C800FFA34D /* ReduxSandwichesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A52CAF24E850C800FFA34D /* ReduxSandwichesApp.swift */; };
 		B4A52CB424E850CF00FFA34D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4A52CB324E850CF00FFA34D /* Assets.xcassets */; };
 		B4A52CB724E850CF00FFA34D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4A52CB624E850CF00FFA34D /* Preview Assets.xcassets */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		B487B79524E8C8B2007A8DE5 /* SandwichViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandwichViewModel.swift; sourceTree = "<group>"; };
+		B487B79724E8F9CA007A8DE5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B4A52CAC24E850C800FFA34D /* ReduxSandwiches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReduxSandwiches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4A52CAF24E850C800FFA34D /* ReduxSandwichesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxSandwichesApp.swift; sourceTree = "<group>"; };
 		B4A52CB324E850CF00FFA34D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				B4A52CF524E853A200FFA34D /* SettingsReduxModel.swift */,
 				B4A52CF624E853A200FFA34D /* SettingsView.swift */,
+				B487B79724E8F9CA007A8DE5 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				B4A52CFE24E853AC00FFA34D /* SandwichMiddleware.swift in Sources */,
 				B4A52CE624E852CC00FFA34D /* Common.swift in Sources */,
 				B4A52CF724E853A200FFA34D /* SettingsReduxModel.swift in Sources */,
+				B487B79824E8F9CA007A8DE5 /* SettingsViewModel.swift in Sources */,
 				B4A52CE524E852CC00FFA34D /* AppStore.swift in Sources */,
 				B4A52D0324E853E600FFA34D /* MainMenuView.swift in Sources */,
 				B4A52CE924E852CC00FFA34D /* AppState.swift in Sources */,

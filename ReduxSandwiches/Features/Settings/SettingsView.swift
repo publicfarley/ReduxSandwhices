@@ -10,6 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var store: AppStore
     
+    var viewModel: SettingsViewModel {
+        store as SettingsViewModel
+    }
+    
     @State private var appearanceModeIndex = 0
 
     var body: some View {
@@ -25,10 +29,10 @@ struct SettingsView: View {
             }
             .navigationBarTitle("Settings")
         }.onAppear {
-            appearanceModeIndex = store.state.settingsState.appearanceMode == .dark ? 0 : 1
+            appearanceModeIndex = viewModel.currentAppearanceMode == .dark ? 0 : 1
         }.onChange(of: appearanceModeIndex, perform: { value in
             let appearanceMode = AppearanceMode.allCases[value]
-            store.dispatch(.settings(action: .setAppearanceMode(to: appearanceMode)))
+            viewModel.setAppearanceMode(to: appearanceMode)
         })
     }
 }
