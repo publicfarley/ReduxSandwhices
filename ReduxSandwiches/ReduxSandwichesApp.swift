@@ -11,7 +11,7 @@ func initializedStore() -> AppStore {
     let theStore = AppStore(initialState: .defaultState,
                             reducer: appReducer,
                             middleware: [createLoggerMiddleware(),
-                                         createSandwichMiddleware(for: SandwichService())
+                                         createSandwichMiddleware(for: SandwichService.live)
                                          ])
 
     theStore.dispatch(.sandwich(action: .retrieveCurrentSandwich))

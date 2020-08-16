@@ -9,7 +9,7 @@ import Foundation
 
 protocol SandwichViewModel {
     var sandwichState: SandwichState { get }
-    var isCurrentView: Bool { get }
+    var isSandwichViewTheCurrentView: Bool { get }
     func retrieveCurrentSandwich()
     func clearCurrentSandwich()
 }
@@ -19,7 +19,7 @@ extension AppStore: SandwichViewModel {
         state.sandwichState
     }
     
-    var isCurrentView: Bool {
+    var isSandwichViewTheCurrentView: Bool {
         state.screenState == .sandwichDisplay
     }
     

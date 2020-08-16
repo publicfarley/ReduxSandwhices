@@ -32,7 +32,7 @@ struct SandwichView: View {
                 switch sandwichState.status {
                 case .loaded, .empty:
                     Button("Load New Sandwich") {
-                        loadSandwich()
+                        viewModel.retrieveCurrentSandwich()
                     }
 
                 default:
@@ -43,12 +43,12 @@ struct SandwichView: View {
             }
         }
         .alert(isPresented: .constant(isError())) {
-            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: loadSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
+            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: viewModel.retrieveCurrentSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
         }
     }
     
     private func isError() -> Bool {
-        guard viewModel.isCurrentView else {
+        guard viewModel.isSandwichViewTheCurrentView else {
             return false
         }
         
@@ -87,10 +87,6 @@ struct SandwichView: View {
                 EmptyView()
             }
         }
-    }
-        
-    private func loadSandwich() {
-        viewModel.retrieveCurrentSandwich()
     }
         
     private var sandwichState: SandwichState {

@@ -8,7 +8,14 @@
 import Foundation
 
 struct SandwichService {
-    static let sandwichs = [
+    var fetchSandwich: (@escaping (Result<String,Error>) -> Void) -> Void
+}
+
+// Live Service
+extension SandwichService {
+
+    static let sandwiches =
+        [
         "Club",
         "Pastrami on rye",
         "French dip",
@@ -19,12 +26,12 @@ struct SandwichService {
         "Fluffernutter",
         "Avocado Toast",
         "Gua bao"
-    ]
+        ]
     
-    func fetchSandwich(completion: @escaping (Result<String,Error>) -> Void) {
+    static let live = SandwichService(fetchSandwich: { completion in
         let waitTime = Double.random(in: 0..<5)
         
-        let errorOccured = Int.random(in: 1...10) == 1 ? true : false // 33% chance of error
+        let errorOccured = Int.random(in: 1...10) == 1 ? true : false
         
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + waitTime) {
             
@@ -33,10 +40,10 @@ struct SandwichService {
                 return
             }
             
-            let chosenSandwich = Self.sandwichs.randomElement() ?? ""
+            let chosenSandwich = Self.sandwiches.randomElement() ?? ""
             completion(.success(chosenSandwich))
         }
-    }
+    })
 }
 
 enum SandwichServiceError: Error {
