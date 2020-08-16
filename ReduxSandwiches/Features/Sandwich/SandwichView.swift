@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SandwichView: View {
-    @EnvironmentObject var store: AppStore
+    @EnvironmentObject private var store: AppStore
+    
+    var viewModel: SandwichViewModel {
+        store as SandwichViewModel
+    }
     
     var body: some View {
         VStack {
@@ -39,12 +43,12 @@ struct SandwichView: View {
             }
         }
         .alert(isPresented: .constant(isError())) {
-            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: loadSandwich), secondaryButton: .cancel(resetToEmpty))
+            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: loadSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
         }
     }
     
     private func isError() -> Bool {
-        guard store.state.screenState == .sandwichDisplay else {
+        guard viewModel.isCurrentView else {
             return false
         }
         
@@ -86,15 +90,11 @@ struct SandwichView: View {
     }
         
     private func loadSandwich() {
-        store.dispatch(.sandwich(action: .retrieveCurrentSandwich))
+        viewModel.retrieveCurrentSandwich()
     }
-    
-    private func resetToEmpty() {
-        store.dispatch(.sandwich(action: .setCurrentSandwich(sandwich: .success(""))))
-    }
-    
+        
     private var sandwichState: SandwichState {
-        store.state.sandwichState
+        viewModel.sandwichState
     }
 }
 
