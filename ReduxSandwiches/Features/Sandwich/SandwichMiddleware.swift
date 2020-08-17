@@ -13,9 +13,9 @@ func createSandwichMiddleware(for service: SandwichService) -> Middleware<AppSta
         
         switch action {
         
-        case .sandwich(.retrieveCurrentSandwich):
+        case .sandwich(.retrieveSandwich(let excludedSandwich)):
             
-            service.fetchSandwich { result in
+            service.fetchSandwich(excludedSandwich) { result in
                 DispatchQueue.main.async {
                     dispatcher(AppAction.sandwich(action: .setCurrentSandwich(sandwich: result)))
                 }

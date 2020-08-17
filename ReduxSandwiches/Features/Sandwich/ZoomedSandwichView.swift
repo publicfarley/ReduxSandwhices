@@ -29,8 +29,8 @@ struct ZoomedSandwichView: View {
         .background(
             Image(sandwich)
                 .resizable()
-                .aspectRatio(contentMode: .fill))
-        .edgesIgnoringSafeArea(.all)
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all))
     }
 }
 

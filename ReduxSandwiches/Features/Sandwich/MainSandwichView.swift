@@ -35,7 +35,7 @@ struct MainSandwichView: View {
                     Button("Load New Sandwich") {
                         withAnimation {
                             isSandwichPresented = false
-                            viewModel.retrieveCurrentSandwich()
+                            viewModel.retrieveNewSandwich()
                         }
                     }
 
@@ -50,7 +50,7 @@ struct MainSandwichView: View {
             }
         }
         .alert(isPresented: .constant(isError())) {
-            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: viewModel.retrieveCurrentSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
+            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: viewModel.retrieveNewSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
         }
     }
     

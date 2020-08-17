@@ -14,7 +14,7 @@ func initializedStore() -> AppStore {
                                          createSandwichMiddleware(for: SandwichService.live)
                                          ])
 
-    theStore.dispatch(.sandwich(action: .retrieveCurrentSandwich))
+    theStore.dispatch(.sandwich(action: .retrieveSandwich(excluding: "")))
     
     return theStore
 }

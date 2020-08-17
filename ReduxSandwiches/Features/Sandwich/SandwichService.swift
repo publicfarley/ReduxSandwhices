@@ -8,7 +8,7 @@
 import Foundation
 
 struct SandwichService {
-    var fetchSandwich: (@escaping (Result<String,Error>) -> Void) -> Void
+    var fetchSandwich: (SandwichName, @escaping (Result<SandwichName,Error>) -> Void) -> Void
 }
 
 // Live Service
@@ -28,7 +28,7 @@ extension SandwichService {
         "Gua bao"
         ]
     
-    static let live = SandwichService(fetchSandwich: { completion in
+    static let live = SandwichService(fetchSandwich: { excludedSandwich, completion in
         let waitTime = 2.0 // Double.random(in: 0..<5)
         
         let errorOccured = false //Int.random(in: 1...10) == 1 ? true : false
@@ -40,7 +40,8 @@ extension SandwichService {
                 return
             }
             
-            let chosenSandwich = Self.sandwiches.randomElement() ?? ""
+            let sandwichesToChooseFrom = Self.sandwiches.filter { $0 != excludedSandwich }
+            let chosenSandwich = sandwichesToChooseFrom.randomElement() ?? ""
             completion(.success(chosenSandwich))
         }
     })

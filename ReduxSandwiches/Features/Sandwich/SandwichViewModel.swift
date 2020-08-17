@@ -10,7 +10,8 @@ import Foundation
 protocol SandwichViewModel {
     var sandwichState: SandwichState { get }
     var isSandwichViewTheCurrentView: Bool { get }
-    func retrieveCurrentSandwich()
+    var currentSandwich: SandwichName { get }
+    func retrieveNewSandwich()
     func clearCurrentSandwich()
 }
 
@@ -22,13 +23,22 @@ extension AppStore: SandwichViewModel {
     var isSandwichViewTheCurrentView: Bool {
         state.screenState == .sandwichDisplay
     }
-    
-    func retrieveCurrentSandwich() {
-        dispatch(.sandwich(action: .retrieveCurrentSandwich))
+
+    var currentSandwich: SandwichName {
+        switch state.sandwichState.status {
+        case .loaded(value: let value):
+            return value
+        default:
+            return ""
+        }
+    }
+
+    func retrieveNewSandwich() {
+        dispatch(.sandwich(action: .retrieveSandwich(excluding: currentSandwich)))
     }
     
     func clearCurrentSandwich() {
         dispatch(.sandwich(action: .setCurrentSandwich(sandwich: .success(""))))
- 
     }
+    
 }

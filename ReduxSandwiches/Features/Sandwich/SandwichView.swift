@@ -19,7 +19,7 @@ struct SandwichView: View {
     var body: some View {
         VStack {
             if isZoomed {
-                ZoomedSandwichView(sandwich: currentSandwich)
+                ZoomedSandwichView(sandwich: viewModel.currentSandwich)
             } else {
                 MainSandwichView()
             }
@@ -27,22 +27,12 @@ struct SandwichView: View {
         .contentShape(Rectangle()) // Makes the whole VStack tappable, rather than just the constituent content items
         .onTapGesture {
             withAnimation {
-                if !currentSandwich.isEmpty {
+                if !viewModel.currentSandwich.isEmpty {
                     isZoomed.toggle()
                 }
             }
         }
     }
-    
-    private var currentSandwich: String {
-        switch viewModel.sandwichState.status {
-        case .loaded(value: let value):
-            return value
-        default:
-            return ""
-        }
-    }
-
 }
 
 

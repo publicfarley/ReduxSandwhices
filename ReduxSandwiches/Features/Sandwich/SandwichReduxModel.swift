@@ -16,8 +16,8 @@ struct SandwichState {
 
 // MARK: Actions
 enum SandwichAction {
-    case retrieveCurrentSandwich
-    case setCurrentSandwich(sandwich: Result<String,Error>)
+    case retrieveSandwich(excluding: SandwichName)
+    case setCurrentSandwich(sandwich: Result<SandwichName,Error>)
 }
 
 // MARK: Reducers
@@ -35,7 +35,7 @@ func sandwichReducer(state: inout SandwichState, action: SandwichAction) -> Void
         }
         
         
-    case .retrieveCurrentSandwich:
+    case .retrieveSandwich:
         state.status = .loading
     }
 }
@@ -53,8 +53,8 @@ extension SandwichAction: CustomStringConvertible {
         let suffix: String
         
         switch self {
-        case .retrieveCurrentSandwich:
-            suffix = "retrieveCurrentSandwich"
+        case .retrieveSandwich(let excludedSandwich):
+            suffix = "retrieveSandwich excluding \(excludedSandwich == "" ? "none" : excludedSandwich)"
         case .setCurrentSandwich(let sandwich):
             suffix = "setCurrentSandwich to result: \(sandwich)"
         }
