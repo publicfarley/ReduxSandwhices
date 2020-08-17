@@ -9,7 +9,7 @@ import Foundation
 
 struct AboutState {
     var title: String {
-        "Redux Sandwich Name Generator"
+        "Redux Sandwich App"
     }
     
     var copyrightMessage: String {

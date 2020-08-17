@@ -11,22 +11,26 @@ struct ZoomedSandwichView: View {
     let sandwich: String
     
     var body: some View {
-        ZStack {
-            Image(sandwich)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
+        HStack {
+            Spacer()
             
             VStack {
                 Text(sandwich)
                     .bold()
                     .frame(alignment: .center)
-                    .background(Color(UIColor.systemBackground).opacity(0.05))
+                    .background(Color(UIColor.systemBackground).opacity(0.10))
                     .font(.largeTitle)
-                
+
                 Spacer()
             }
+            
+            Spacer()
         }
+        .background(
+            Image(sandwich)
+                .resizable()
+                .aspectRatio(contentMode: .fill))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
