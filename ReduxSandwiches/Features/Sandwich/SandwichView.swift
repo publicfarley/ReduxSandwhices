@@ -14,84 +14,35 @@ struct SandwichView: View {
         store as SandwichViewModel
     }
     
+    @State private var isZoomed = false
+    
     var body: some View {
         VStack {
-            Text("Sandwiches")
-                .bold()
-                .font(.largeTitle)
-            
-            Spacer()
-            
-            VStack {
-                Spacer()
-                
-                currentSandwichView
-                    .padding()
-                    .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.25)))
-
-                switch sandwichState.status {
-                case .loaded, .empty:
-                    Button("Load New Sandwich") {
-                        viewModel.retrieveCurrentSandwich()
-                    }
-
-                default:
-                    EmptyView()
-                }
-                
-                Spacer()
+            if isZoomed {
+                ZoomedSandwichView(sandwich: currentSandwich)
+            } else {
+                MainSandwichView()
             }
         }
-        .alert(isPresented: .constant(isError())) {
-            Alert(title: Text("Error loading sandwich"), message: Text(""), primaryButton: .default(Text("Try Again"), action: viewModel.retrieveCurrentSandwich), secondaryButton: .cancel(viewModel.clearCurrentSandwich))
+        .contentShape(Rectangle()) // Makes the whole VStack tappable, rather than just the constituent content items
+        .onTapGesture {
+            withAnimation {
+                if !currentSandwich.isEmpty {
+                    isZoomed.toggle()
+                }
+            }
         }
     }
     
-    private func isError() -> Bool {
-        guard viewModel.isSandwichViewTheCurrentView else {
-            return false
-        }
-        
-        switch sandwichState.status {
-        case .error:
-            return true
+    private var currentSandwich: String {
+        switch viewModel.sandwichState.status {
+        case .loaded(value: let value):
+            return value
         default:
-            return false
+            return ""
         }
     }
-    
-    private var currentSandwichView: some View {
-        Group {
-            switch sandwichState.status {
-            case .empty:
-                EmptyView()
-                
-            case .loading:
-                ProgressView("Loading...")
-                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                    .foregroundColor(.blue)
-                
-            case .loaded(let currentSandwich):
-                VStack {
-                    Image(currentSandwich)
-                        .resizable()
-                        .frame(width: 250, height: 250)
-                        .clipShape(Circle())
-                        .padding()
 
-                    Text(currentSandwich)
-                        .font(.title)
-                }
-                
-            case .error:
-                EmptyView()
-            }
-        }
-    }
-        
-    private var sandwichState: SandwichState {
-        viewModel.sandwichState
-    }
 }
 
 
@@ -111,7 +62,7 @@ struct SandwichView_Previews_Loaded: PreviewProvider {
             reducer: appReducer,
             middleware:[])
         
-        theStore.dispatch(.sandwich(action: .setCurrentSandwich(sandwich: .success("Test Sandwich"))))
+        theStore.dispatch(.sandwich(action: .setCurrentSandwich(sandwich: .success("Avocado Toast"))))
         
         return theStore
     }

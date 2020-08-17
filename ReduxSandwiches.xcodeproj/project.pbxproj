@@ -31,6 +31,8 @@
 		B4A52D0024E853AC00FFA34D /* SandwichService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A52CFC24E853AC00FFA34D /* SandwichService.swift */; };
 		B4A52D0324E853E600FFA34D /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A52D0124E853E600FFA34D /* MainMenuView.swift */; };
 		B4A52D0424E853E600FFA34D /* MainMenuReduxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A52D0224E853E600FFA34D /* MainMenuReduxModel.swift */; };
+		B4C16D3524E9D55700957E7A /* ZoomedSandwichView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C16D3424E9D55700957E7A /* ZoomedSandwichView.swift */; };
+		B4C16D3724E9EEE100957E7A /* MainSandwichView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C16D3624E9EEE100957E7A /* MainSandwichView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		B4A52CFC24E853AC00FFA34D /* SandwichService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SandwichService.swift; sourceTree = "<group>"; };
 		B4A52D0124E853E600FFA34D /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		B4A52D0224E853E600FFA34D /* MainMenuReduxModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuReduxModel.swift; sourceTree = "<group>"; };
+		B4C16D3424E9D55700957E7A /* ZoomedSandwichView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomedSandwichView.swift; sourceTree = "<group>"; };
+		B4C16D3624E9EEE100957E7A /* MainSandwichView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSandwichView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +231,8 @@
 				B4A52CFB24E853AB00FFA34D /* SandwichReduxModel.swift */,
 				B4A52CFC24E853AC00FFA34D /* SandwichService.swift */,
 				B4A52CF924E853AB00FFA34D /* SandwichView.swift */,
+				B4C16D3424E9D55700957E7A /* ZoomedSandwichView.swift */,
+				B4C16D3624E9EEE100957E7A /* MainSandwichView.swift */,
 				B487B79524E8C8B2007A8DE5 /* SandwichViewModel.swift */,
 			);
 			path = Sandwich;
@@ -371,9 +377,11 @@
 				B4A52CE524E852CC00FFA34D /* AppStore.swift in Sources */,
 				B4A52D0324E853E600FFA34D /* MainMenuView.swift in Sources */,
 				B4A52CE924E852CC00FFA34D /* AppState.swift in Sources */,
+				B4C16D3524E9D55700957E7A /* ZoomedSandwichView.swift in Sources */,
 				B4A52D0424E853E600FFA34D /* MainMenuReduxModel.swift in Sources */,
 				B4A52CE824E852CC00FFA34D /* AppReducers.swift in Sources */,
 				B4A52CF424E8539600FFA34D /* AboutView.swift in Sources */,
+				B4C16D3724E9EEE100957E7A /* MainSandwichView.swift in Sources */,
 				B4A52CFF24E853AC00FFA34D /* SandwichReduxModel.swift in Sources */,
 				B4A52CF324E8539600FFA34D /* AboutReduxModel.swift in Sources */,
 				B4A52CB024E850C800FFA34D /* ReduxSandwichesApp.swift in Sources */,
