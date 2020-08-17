@@ -14,6 +14,8 @@ struct MainSandwichView: View {
         store as SandwichViewModel
     }
     
+    @State var isSandwichPresented = false  // Required to track the observed store, so that the zoom transition insertion animation works
+    
     var body: some View {
         VStack {
             Text("Sandwiches")
@@ -27,12 +29,14 @@ struct MainSandwichView: View {
                 
                 currentSandwichView
                     .padding()
-                    .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.25)))
 
                 switch viewModel.sandwichState.status {
                 case .loaded, .empty:
                     Button("Load New Sandwich") {
-                        viewModel.retrieveCurrentSandwich()
+                        withAnimation {
+                            isSandwichPresented = false
+                            viewModel.retrieveCurrentSandwich()
+                        }
                     }
 
                 default:
@@ -40,6 +44,9 @@ struct MainSandwichView: View {
                 }
                 
                 Spacer()
+                
+                HStack { Spacer() }
+                // HStack is needed for the transition to work correctly (as per here: https://stackoverflow.com/questions/56680017/this-swiftui-animation-should-only-fade-out-why-does-it-move-to-the-right)
             }
         }
         .alert(isPresented: .constant(isError())) {
@@ -61,30 +68,44 @@ struct MainSandwichView: View {
     }
     
     private var currentSandwichView: some View {
-        Group {
+        VStack {
             switch viewModel.sandwichState.status {
-            case .empty:
+            case .empty, .error:
                 EmptyView()
-                
+
             case .loading:
                 ProgressView("Loading...")
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .foregroundColor(.blue)
-                
+
             case .loaded(let currentSandwich):
                 VStack {
-                    Image(currentSandwich)
-                        .resizable()
-                        .frame(width: 250, height: 250)
-                        .clipShape(Circle())
-                        .padding()
+                    if isSandwichPresented {
+                        VStack {
+                        Image(currentSandwich)
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 250, height: 250)
+                            .padding()
+                        
+                        Text(currentSandwich)
+                            .font(.title)
+                        }
+                        .transition(.scale)
 
-                    Text(currentSandwich)
-                        .font(.title)
+                    } else {
+                        Text("") // Required so that the zoom transition animation works correctly for current sandwich view insertion
+                            .frame(width: 250, height: 250)
+                            .padding()
+                    }
+
                 }
-                
-            case .error:
-                EmptyView()
+                .transition(.scale)
+                .onAppear {
+                    withAnimation {
+                        isSandwichPresented = true
+                    }
+                }
             }
         }
     }

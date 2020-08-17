@@ -29,9 +29,9 @@ extension SandwichService {
         ]
     
     static let live = SandwichService(fetchSandwich: { completion in
-        let waitTime = Double.random(in: 0..<5)
+        let waitTime = 2.0 // Double.random(in: 0..<5)
         
-        let errorOccured = Int.random(in: 1...10) == 1 ? true : false
+        let errorOccured = false //Int.random(in: 1...10) == 1 ? true : false
         
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + waitTime) {
             
