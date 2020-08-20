@@ -67,6 +67,8 @@ struct MainSandwichView: View {
         }
     }
     
+    static let sandwichFrameSideLength: CGFloat = 300
+    
     private var currentSandwichView: some View {
         VStack {
             switch viewModel.sandwichState.status {
@@ -85,7 +87,7 @@ struct MainSandwichView: View {
                         Image(currentSandwich)
                             .resizable()
                             .clipShape(Circle())
-                            .frame(width: 250, height: 250)
+                            .squareFrame(length: Self.sandwichFrameSideLength)
                             .padding()
                         
                         Text(currentSandwich)
@@ -95,7 +97,7 @@ struct MainSandwichView: View {
 
                     } else {
                         Text("") // Required so that the zoom transition animation works correctly for current sandwich view insertion
-                            .frame(width: 250, height: 250)
+                            .squareFrame(length: Self.sandwichFrameSideLength)
                             .padding()
                     }
 
@@ -108,6 +110,12 @@ struct MainSandwichView: View {
                 }
             }
         }
+    }
+}
+
+private extension View {
+    func squareFrame(length: CGFloat) -> some View {
+        self.frame(width: length, height: length)
     }
 }
 

@@ -25,7 +25,11 @@ extension SandwichService {
         "Hot dog",
         "Fluffernutter",
         "Avocado Toast",
-        "Gua bao"
+        "Italian Sausage",
+        "Egg Salad",
+        "Smoked Salmon Eggs Benedict",
+        "Tuna Salad",
+        "Eggplant Parmesan"
         ]
     
     static let live = SandwichService(fetchSandwich: { excludedSandwich, completion in
