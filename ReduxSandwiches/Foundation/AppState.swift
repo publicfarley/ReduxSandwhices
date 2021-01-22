@@ -19,7 +19,7 @@ struct AppState {
 extension AppState {
     static let defaultState = AppState(screenState: .sandwichDisplay,
                                 sandwichState: SandwichState(status: .empty),
-                                settingsState: SettingsState(appearanceMode: .light),
+                                settingsState: SettingsState(appearanceMode: .system),
                                 aboutState: AboutState())
 }
 

@@ -10,6 +10,8 @@ import SwiftUI
 struct MainMenuView: View {
     @EnvironmentObject var store: AppStore
     @State private var selectedIndex = 0
+    @Environment(\.colorScheme) var systemColorScheme
+
     
     var body: some View {
         TabView(selection: $selectedIndex) {
@@ -39,8 +41,18 @@ struct MainMenuView: View {
             
             store.dispatch(
                 .navigation(action: .setCurrentScreen(to: screen)))
-        }.environment(\.colorScheme,
-                      store.state.settingsState.appearanceMode == .dark ? .dark : .light)
+        }.environment(\.colorScheme, currentColorScheme)
+    }
+    
+    private var currentColorScheme: ColorScheme {
+        switch store.state.settingsState.appearanceMode {
+        case .system:
+            return systemColorScheme
+        case .dark:
+            return .dark
+        case .light:
+            return .light
+        }
     }
 }
 

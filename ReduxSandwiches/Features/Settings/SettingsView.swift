@@ -29,11 +29,21 @@ struct SettingsView: View {
             }
             .navigationBarTitle("Settings")
         }.onAppear {
-            appearanceModeIndex = viewModel.currentAppearanceMode == .dark ? 0 : 1
+            appearanceModeIndex = viewModel.currentAppearanceMode.toAppearanceModeIndex
         }.onChange(of: appearanceModeIndex, perform: { value in
             let appearanceMode = AppearanceMode.allCases[value]
             viewModel.setAppearanceMode(to: appearanceMode)
         })
+    }
+}
+
+private extension AppearanceMode {
+    var toAppearanceModeIndex: Int {
+        switch self {
+        case .dark: return 0
+        case .light: return 1
+        case .system: return 2
+        }
     }
 }
 

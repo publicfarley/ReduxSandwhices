@@ -15,6 +15,7 @@ enum SettingsAction {
 enum AppearanceMode: String, CaseIterable {
     case dark
     case light
+    case system
 }
 
 struct SettingsState {
